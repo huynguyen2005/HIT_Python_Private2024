@@ -1,0 +1,5 @@
+a = int(input("Nhap so a= "))
+t = len(oct(a).replace('0o', ''))
+print("So luong cac bit can thiet de bieu dien so a o he 8:", t)
+print("Cac thuoc tinh va phuong thuc cua kieu number: ")
+print(dir(a))

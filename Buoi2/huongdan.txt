@@ -1,0 +1,13 @@
+cd/
+home/
+ls\ liệt kê ra những thư mục có trên destop
+lệnh xóa màn hình clear
+// tao thư mục 
+mkdir python
+//lệnh tạo file
+touch hello.py
+//thoát ra ctrl x
+//xem nội dung ở trong file hello.py
+cat hello.py
+//chạy file hello.py
+python3 hello.py
