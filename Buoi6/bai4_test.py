@@ -1,23 +1,51 @@
-a = input("Nhap data: ")
-data = list(a.split(',')) 
+from collections import defaultdict
 
-names, ages, scores, cities = [], [], [], []
+# Dữ liệu đầu vào
+data = [
+    "name=Alice;age=30;score=85.5",
+    "name=Bob;age=25;score=90",
+    "name=Alice;age=30;score=92",
+    "city=NewYork;name=Eve;age=35;score=88",
+    "city=London;name=Alice;age=30;score=85.5"
+]
 
-for x in data:
-    if 'name=' in x:
-        names.append(x.split('name=')[1])  
-    elif 'age=' in x:
-        ages.append(x.split('age=')[1])  
-    elif 'score=' in x:
-        scores.append(x.split('score=')[1]) 
-    elif 'city=' in x:
-        cities.append(x.split('city=')[1]) 
+# Phân tích dữ liệu thành dictionary lớn
+dict_data = defaultdict(list)
 
-new_dict = {
-    'name': names,
-    'age': ages,
-    'score': scores,
-    'city': cities
-}
+# Tách từng chuỗi trong danh sách
+for entry in data:
+    pairs = entry.split(';')
+    for pair in pairs:
+        key, value = pair.split('=')
+        # Xử lý kiểu dữ liệu cho value
+        if value.isdigit():  # Số nguyên
+            value = int(value)
+        else:
+            try:
+                value = float(value)  # Số thực
+            except ValueError:
+                pass  # Chuỗi ký tự giữ nguyên
+        dict_data[key].append(value)
 
-print(new_dict)
+# Tính toán kết quả
+result = {}
+
+for key, values in dict_data.items():
+    unique_values = set(values)
+    unique_count = len(unique_values)
+
+    # Tìm giá trị lớn nhất nếu là số
+    max_value = max((v for v in values if isinstance(v, (int, float))), default=None)
+
+    # Tìm độ dài chuỗi lớn nhất nếu là chuỗi
+    max_length = max((len(v) for v in values if isinstance(v, str)), default=None)
+
+    result[key] = {
+        "unique_count": unique_count,
+        "max_value": max_value,
+        "max_length": max_length
+    }
+
+# In kết quả
+print("dict =", dict(dict_data))
+print("result =", result)

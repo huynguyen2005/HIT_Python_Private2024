@@ -1,7 +1,13 @@
-dict = eval(input("Nhập dictionary: "))
-ndict = {}
-for key, val in dict.items():
-    if val in ndict:
-        print("None")
-    ndict[val] = key
-print(ndict)
+thisdict = {}
+n = int(input('Nhap so luong phan tu cua dictionnary: '))
+for i in range(n):
+    key = input('Nhap key: ')
+    value = eval(input('Nhap value: '))
+    thisdict[key]=value
+print(thisdict)
+newdict = {}
+for key,value in thisdict.items():
+    if value in newdict:
+        print('None')
+    newdict[value]=key
+print(newdict)
